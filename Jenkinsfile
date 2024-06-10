@@ -47,8 +47,7 @@ pipeline {
         always {
             script {
                 echo 'Cleaning workspace...'
-                junit '**/test-*.xml'
-                cleanWs()
+
             }
         }
     }
