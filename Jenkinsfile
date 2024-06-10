@@ -4,27 +4,40 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/aryan7iitj/simple-ml-project'
+                script {
+                    echo 'Checking out the repository...'
+                    git branch: 'master', url: 'https://github.com/aryan7iitj/simple-ml-project'
+                }
             }
         }
         stage('Install dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                script {
+                    echo 'Installing dependencies...'
+                    bat 'pip install -r requirements.txt'
+                }
             }
         }
         stage('Run tests') {
             steps {
-                sh 'python -m unittest discover -s tests'
+                script {
+                    echo 'Running tests...'
+                    bat 'python -m unittest discover -s tests'
+                }
             }
         }
         stage('Train model') {
             steps {
-                sh 'python model/train.py'
+                script {
+                    echo 'Training model...'
+                    bat 'python model/train.py'
+                }
             }
         }
         stage('Deploy model') {
             steps {
                 script {
+                    echo 'Deploying model...'
                     def modelFile = 'model/linear_regression_model.pkl'
                     archiveArtifacts artifacts: modelFile
                 }
@@ -33,8 +46,14 @@ pipeline {
     }
     post {
         always {
-            junit '**/test-*.xml'
-            cleanWs()
+            script {
+                echo 'Cleaning workspace...'
+                junit '**/test-*.xml'
+                cleanWs()
+            }
         }
+    }
+    options {
+        timeout(time: 30, unit: 'MINUTES')  // Set a timeout for the entire pipeline
     }
 }
