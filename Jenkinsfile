@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: '<repository-url>'
+                git branch: 'master', url: 'https://github.com/aryan7iitj/simple-ml-project'
             }
         }
         stage('Install dependencies') {
