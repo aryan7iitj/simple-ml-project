@@ -10,14 +10,6 @@ pipeline {
                 }
             }
         }
-        stage('Install dependencies') {
-            steps {
-                script {
-                    echo 'Installing dependencies...'
-                    bat 'pip install -r requirements.txt'
-                }
-            }
-        }
         stage('Train model') {
             steps {
                 script {
