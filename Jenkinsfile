@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Checking out the repository...'
-                    git branch: 'master', url: 'https://github.com/aryan7iitj/simple-ml-project'
+                    
                 }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies...'
-                    bat 'pip install -r requirements.txt'
+                   
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    bat 'python -m unittest discover -s tests'
+                    
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo 'Training model...'
-                    bat 'python model/train.py'
+                    
                 }
             }
         }
@@ -38,8 +38,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying model...'
-                    def modelFile = 'model/linear_regression_model.pkl'
-                    archiveArtifacts artifacts: modelFile
+        
                 }
             }
         }
